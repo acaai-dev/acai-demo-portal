@@ -1,56 +1,105 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <title>ACAΛI Portaal – Zones</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACAΛI Dashboard</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       background-color: #f6f4ed;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
       padding: 40px;
-      text-align: center;
+      color: #2c2c2c;
     }
 
     h1 {
-      font-size: 28px;
-      margin-bottom: 20px;
+      text-align: center;
+      font-size: 32px;
     }
 
-    .zone-grid {
-      display: flex;
-      justify-content: center;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
-      flex-wrap: wrap;
+      margin-top: 40px;
     }
 
-    .zone-tile {
-      background-color: white;
-      border: 2px solid #e0ddd7;
-      border-radius: 12px;
+    .card {
+      background: white;
       padding: 20px;
-      width: 200px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      transition: transform 0.2s ease;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
     }
 
-    .zone-tile:hover {
-      transform: scale(1.03);
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      color: #555;
+    }
+
+    .card p {
+      font-size: 20px;
+      margin: 0;
+    }
+
+    .suggestion {
+      margin-top: 40px;
+      text-align: center;
+      font-style: italic;
+      font-size: 18px;
+      background: #fff5e6;
+      padding: 20px;
+      border-radius: 12px;
     }
   </style>
 </head>
 <body>
-  <h1>Welkom in het ACAΛI Portaal</h1>
-  <div class="zone-grid">
-    <div class="zone-tile" onclick="openComfort()">Bureauruimte</div>
-    <div class="zone-tile" onclick="openComfort()">Vergaderruimte</div>
-    <div class="zone-tile" onclick="openComfort()">Lounge</div>
+  <h1>ACAΛI Comfort Dashboard</h1>
+
+  <div class="grid">
+    <div class="card">
+      <h3>📍 Zone</h3>
+      <p>Bureauruimte</p>
+    </div>
+    <div class="card">
+      <h3>🎛️ Preset</h3>
+      <p>Focus 🎯</p>
+    </div>
+    <div class="card">
+      <h3>💡 Licht</h3>
+      <p>60%</p>
+    </div>
+    <div class="card">
+      <h3>🌡️ Temperatuur</h3>
+      <p>22°C</p>
+    </div>
   </div>
 
+  <div class="suggestion">
+    <div style="text-align: center; margin-top: 30px;">
+    <button onclick="applyPreset('Focus 🎯')">Focus</button>
+    <button onclick="applyPreset('Ontspanning 🛋️')">Ontspanning</button>
+    <button onclick="applyPreset('Stilte 🤫')">Stilte</button>
+  </div>
+  
+  <div id="toast" style="display: none; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+  background: #333; color: white; padding: 12px 20px; border-radius: 8px; font-size: 14px;">
+    Comfortpreset gewijzigd.
+  </div>
+    🤖 ACAΛI Suggestie: Het is namiddag – wil je overschakelen naar <strong>Ontspanning</strong>?
+  </div>
   <script>
-    function openComfort() {
-      window.location.href = "comfort.html";
+    function applyPreset(presetName) {
+      document.querySelector('.card:nth-child(2) p').textContent = presetName;
+      showToast();
+    }
+  
+    function showToast() {
+      const toast = document.getElementById('toast');
+      toast.style.display = 'block';
+      setTimeout(() => toast.style.display = 'none', 3000);
     }
   </script>
-</body>
+  </body>
 </html>
